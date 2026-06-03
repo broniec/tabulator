@@ -5680,6 +5680,12 @@
 					}
 					
 					this.layoutRefresh(true);
+					
+					// handle resized columns
+					if(this.table.modExists("groupRows")){
+						this.table.modules.groupRows.virtualRenderFill();
+					}
+
 				}
 			}else {
 				this.renderEmptyScroll();
@@ -18644,7 +18650,10 @@
 		
 		reinitializeHeight(){}
 		
-		calcHeight(){}
+		calcHeight(){
+			this.outerHeight = this.element.offsetHeight;
+		}
+
 		
 		setCellHeight(){}
 		
