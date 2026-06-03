@@ -1,4 +1,4 @@
-/* Tabulator v6.3.1 (c) Oliver Folkerd 2025 */
+/* Tabulator v6.3.1 (c) Oliver Folkerd 2026 */
 class CoreFeature{
 
 	constructor(table){
@@ -12279,7 +12279,10 @@ class Group{
 	
 	reinitializeHeight(){}
 	
-	calcHeight(){}
+	calcHeight(){
+		this.outerHeight = this.element.offsetHeight;
+	}
+
 	
 	setCellHeight(){}
 	
@@ -26658,6 +26661,12 @@ class RowManager extends CoreFeature{
 				}
 				
 				this.layoutRefresh(true);
+				
+				// handle resized columns
+				if(this.table.modExists("groupRows")){
+					this.table.modules.groupRows.virtualRenderFill();
+				}
+
 			}
 		}else {
 			this.renderEmptyScroll();

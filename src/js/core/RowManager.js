@@ -929,6 +929,12 @@ export default class RowManager extends CoreFeature{
 				}
 				
 				this.layoutRefresh(true);
+				
+				// handle resized columns
+				if(this.table.modExists("groupRows")){
+					this.table.modules.groupRows.virtualRenderFill();
+				}
+
 			}
 		}else{
 			this.renderEmptyScroll();

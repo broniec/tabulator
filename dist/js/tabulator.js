@@ -1,4 +1,4 @@
-/* Tabulator v6.3.1 (c) Oliver Folkerd 2025 */
+/* Tabulator v6.3.1 (c) Oliver Folkerd 2026 */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
@@ -5669,6 +5669,12 @@
 					}
 					
 					this.layoutRefresh(true);
+					
+					// handle resized columns
+					if(this.table.modExists("groupRows")){
+						this.table.modules.groupRows.virtualRenderFill();
+					}
+
 				}
 			}else {
 				this.renderEmptyScroll();
@@ -18596,7 +18602,10 @@
 		
 		reinitializeHeight(){}
 		
-		calcHeight(){}
+		calcHeight(){
+			this.outerHeight = this.element.offsetHeight;
+		}
+
 		
 		setCellHeight(){}
 		
